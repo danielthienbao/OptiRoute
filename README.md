@@ -2,89 +2,6 @@
 
 OptiRoute is a route planning system that combines geolocation data with advanced algorithms to optimize delivery and ride-sharing routes.
 
-## Features
-
-### ✅ Implemented Features
-
-- **Authentication & Authorization**
-  - JWT-based authentication with refresh tokens
-  - Role-based access control (ADMIN/DRIVER)
-  - Secure API endpoints with Spring Security
-  - User registration, login, and profile management
-  - JWT token generation, validation, and filtering
-
-- **User Management**
-  - Complete user CRUD operations with pagination and filtering
-  - Role-based user management (Admin/Driver)
-  - Password change and reset functionality
-  - User search and filtering by role, status, and search terms
-  - User activation/deactivation
-  - User statistics and dashboard data
-  - Available drivers identification
-
-- **Location Management**
-  - PostGIS integration for spatial data storage
-  - Location CRUD operations with coordinates
-  - Nearby location search with radius-based queries
-  - Distance calculation between locations
-  - Location type categorization (PICKUP, DELIVERY, WAREHOUSE, etc.)
-
-- **Route Management**
-  - Complete route CRUD operations with pagination
-  - Route optimization using TSP algorithms
-  - Multiple optimization strategies (Distance-based, Time-based, Load-balanced)
-  - Route waypoint management and reordering
-  - Driver assignment to routes
-  - Route status tracking (PLANNED, IN_PROGRESS, COMPLETED, CANCELLED)
-  - Batch route optimization
-  - Route filtering by status, driver, and other criteria
-
-- **Delivery Request Management**
-  - Complete delivery request CRUD operations
-  - Delivery status tracking (PENDING, IN_PROGRESS, COMPLETED, FAILED)
-  - Driver assignment algorithms
-  - Real-time status updates
-  - Package tracking with unique tracking numbers
-  - Delivery scheduling and rescheduling
-  - Urgent and overdue delivery identification
-  - Delivery statistics and analytics
-  - Signature capture and delivery confirmation
-
-- **Database & Infrastructure**
-  - PostgreSQL with PostGIS extension
-  - Complete database schema with indexes
-  - Sample data for testing
-  - JPA repositories with custom queries
-  - Spatial indexing for efficient location queries
-
-### 🚧 In Progress / Next Steps
-
-- **Real-time Updates**
-  - WebSocket implementation for live updates
-  - Location tracking service
-  - ETA calculation and route deviation detection
-
-- **Advanced Route Optimization**
-  - Integration with external mapping APIs
-  - Traffic-aware routing
-  - Dynamic route recalculation
-
-- **Notification System**
-  - Email service integration
-  - SMS service integration
-  - Push notification service
-
-## Tech Stack
-
-- **Backend**: Spring Boot 3.2.3, Spring Security, Spring Data JPA
-- **Database**: PostgreSQL 15+ with PostGIS extension
-- **Authentication**: JWT (JSON Web Tokens)
-- **Spatial Data**: JTS (Java Topology Suite), PostGIS
-- **API Documentation**: Swagger/OpenAPI 3
-- **Testing**: JUnit, Mockito
-- **Build Tool**: Maven
-- **Java Version**: 17
-
 ## Project Structure
 
 ```
@@ -311,8 +228,6 @@ The application comes with sample users:
 - Soft delete functionality
 - Comprehensive status tracking for routes and deliveries
 
-## Development
-
 ### Running Tests
 ```bash
 mvn test
@@ -336,10 +251,3 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Support
-
-For support and questions:
-- Email: support@optiroute.com
-- Issues: [GitHub Issues](https://github.com/yourusername/OptiRoute/issues)
-- Documentation: [API Docs](http://localhost:8080/swagger-ui.html)
