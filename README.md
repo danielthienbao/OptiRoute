@@ -1,68 +1,65 @@
-OptiRoute - Route Planner
+# OptiRoute - Route Planner
 
 This is a Spring Boot application that helps users find the best route between multiple locations using Google Maps.
 
-Main Features
+## **Main Features**
 
-Add multiple stops
+- Add multiple stops  
+- Choose between round trip or one way  
+- Finds the most efficient order to visit locations  
+- Shows the route on a map  
+- Displays distance, travel time, and directions
 
-Choose between round trip or one way
+## **Tech Stack**
 
-Finds the most efficient order to visit locations
+- **Backend**: Java with Spring Boot  
+- **Frontend**: HTML, CSS, JavaScript, and Thymeleaf  
+- **Maps**: Google Maps JavaScript API and Directions API
 
-Shows the route on a map
+## **How to Run**
 
-Displays distance, travel time, and directions
-
-Tech Stack
-
-Backend: Java with Spring Boot
-
-Frontend: HTML, CSS, JavaScript, and Thymeleaf
-
-Maps: Google Maps JavaScript API and Directions API
-
-How to Run
-
-Install Java 17 and Maven
-
-Get a Google Maps API key from Google Cloud
-
-Enable Maps JavaScript API and Directions API
-
-Add the API key to the application properties file and the index.html file
-
-Run the application using the command
+1. Install Java 17 and Maven  
+2. Get a Google Maps API key from Google Cloud  
+3. Enable Maps JavaScript API and Directions API  
+4. Add the API key to:
+   - `application.properties` file
+   - `index.html` file  
+5. Run the application:  
 mvn spring-boot:run
 
-Open a browser and go to http://localhost:8080
+css
+Copy
+Edit
+6. Open a browser and go to:  
+http://localhost:8080
 
-Example Usage
+markdown
+Copy
+Edit
 
-Input example:
-Start at San Francisco
-Stops: Palo Alto and San Jose
-End at Los Angeles
-Trip type: One way
+## **Example Usage**
 
-The app returns the best stop order, total distance, total duration, and step-by-step directions.
+**Input example**:  
+Start at San Francisco  
+Stops: Palo Alto and San Jose  
+End at Los Angeles  
+Trip type: One way  
 
-API Routes
+**The app returns**:  
+- Optimized stop order  
+- Total distance  
+- Total duration  
+- Step-by-step directions
 
-GET slash for the main page
+## **API Routes**
 
-POST slash api slash route for route optimization
+- `GET /` - Main page  
+- `POST /api/route` - Route optimization via JSON  
+- `POST /route` - Form submission
 
-POST slash route for form submission
+## **Key Files**
 
-Key Files
-
-RouteController.java handles user input and requests
-
-RouteService.java connects to the Google Maps API
-
-index.html is the main web page
-
-application.properties stores the API key and app settings
-
-Let me know if you want help writing a resume bullet point or understanding any part of the code.
+- `RouteController.java` - Handles user input and requests  
+- `RouteService.java` - Connects to the Google Maps API  
+- `index.html` - Main web page  
+- `application.properties` - Stores API key and app settings
