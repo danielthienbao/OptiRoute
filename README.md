@@ -1,345 +1,206 @@
-# OptiRoute – Intelligent Route Planner
+# OptiRoute - Optimal Route Planner
 
-OptiRoute is a route planning system that combines geolocation data with advanced algorithms to optimize delivery and ride-sharing routes.
+A Spring Boot application that helps users find the most optimal route between multiple locations using Google Maps Directions API.
 
-## Features
+## 🚀 Features
 
-### ✅ Implemented Features
+- **Multiple Location Support**: Enter multiple stops (addresses or coordinates)
+- **Trip Type Selection**: Choose between round-trip or one-way journeys
+- **Route Optimization**: Automatically finds the most efficient route order
+- **Interactive Map**: View the optimized route on Google Maps
+- **Modern UI**: Beautiful, responsive web interface
+- **Real-time Results**: Get distance, duration, and turn-by-turn directions
 
-- **Authentication & Authorization**
-  - JWT-based authentication with refresh tokens
-  - Role-based access control (ADMIN/DRIVER)
-  - Secure API endpoints with Spring Security
-  - User registration, login, and profile management
-  - JWT token generation, validation, and filtering
+## 🛠️ Tech Stack
 
-- **User Management**
-  - Complete user CRUD operations with pagination and filtering
-  - Role-based user management (Admin/Driver)
-  - Password change and reset functionality
-  - User search and filtering by role, status, and search terms
-  - User activation/deactivation
-  - User statistics and dashboard data
-  - Available drivers identification
+- **Backend**: Spring Boot 3.2.0 (Java 17)
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Maps**: Google Maps JavaScript API
+- **Routing**: Google Maps Directions API
+- **Template Engine**: Thymeleaf
 
-- **Location Management**
-  - PostGIS integration for spatial data storage
-  - Location CRUD operations with coordinates
-  - Nearby location search with radius-based queries
-  - Distance calculation between locations
-  - Location type categorization (PICKUP, DELIVERY, WAREHOUSE, etc.)
-
-- **Route Management**
-  - Complete route CRUD operations with pagination
-  - Route optimization using TSP algorithms
-  - Multiple optimization strategies (Distance-based, Time-based, Load-balanced)
-  - Route waypoint management and reordering
-  - Driver assignment to routes
-  - Route status tracking (PLANNED, IN_PROGRESS, COMPLETED, CANCELLED)
-  - Batch route optimization
-  - Route filtering by status, driver, and other criteria
-
-- **Delivery Request Management**
-  - Complete delivery request CRUD operations
-  - Delivery status tracking (PENDING, IN_PROGRESS, COMPLETED, FAILED)
-  - Driver assignment algorithms
-  - Real-time status updates
-  - Package tracking with unique tracking numbers
-  - Delivery scheduling and rescheduling
-  - Urgent and overdue delivery identification
-  - Delivery statistics and analytics
-  - Signature capture and delivery confirmation
-
-- **Database & Infrastructure**
-  - PostgreSQL with PostGIS extension
-  - Complete database schema with indexes
-  - Sample data for testing
-  - JPA repositories with custom queries
-  - Spatial indexing for efficient location queries
-
-### 🚧 In Progress / Next Steps
-
-- **Real-time Updates**
-  - WebSocket implementation for live updates
-  - Location tracking service
-  - ETA calculation and route deviation detection
-
-- **Advanced Route Optimization**
-  - Integration with external mapping APIs
-  - Traffic-aware routing
-  - Dynamic route recalculation
-
-- **Notification System**
-  - Email service integration
-  - SMS service integration
-  - Push notification service
-
-## Tech Stack
-
-- **Backend**: Spring Boot 3.2.3, Spring Security, Spring Data JPA
-- **Database**: PostgreSQL 15+ with PostGIS extension
-- **Authentication**: JWT (JSON Web Tokens)
-- **Spatial Data**: JTS (Java Topology Suite), PostGIS
-- **API Documentation**: Swagger/OpenAPI 3
-- **Testing**: JUnit, Mockito
-- **Build Tool**: Maven
-- **Java Version**: 17
-
-## Project Structure
+## 📁 Project Structure
 
 ```
-optiroute/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/optiroute/
-│   │   │       ├── config/              # Configuration classes
-│   │   │       │   ├── ApplicationConfig.java
-│   │   │       │   ├── SecurityConfig.java
-│   │   │       │   └── GeometryConfig.java
-│   │   │       ├── controller/          # REST controllers
-│   │   │       │   ├── AuthController.java
-│   │   │       │   ├── LocationController.java
-│   │   │       │   ├── RouteController.java
-│   │   │       │   ├── UserController.java
-│   │   │       │   └── DeliveryController.java
-│   │   │       ├── dto/                 # Data Transfer Objects
-│   │   │       │   ├── UserDto.java
-│   │   │       │   ├── LocationDto.java
-│   │   │       │   ├── RouteDto.java
-│   │   │       │   ├── RouteWaypointDto.java
-│   │   │       │   ├── RouteOptimizationRequest.java
-│   │   │       │   ├── RouteAssignmentRequest.java
-│   │   │       │   ├── DeliveryRequestDto.java
-│   │   │       │   ├── DeliveryCreateRequest.java
-│   │   │       │   ├── DeliveryUpdateRequest.java
-│   │   │       │   ├── DeliveryAssignmentRequest.java
-│   │   │       │   ├── UserCreateRequest.java
-│   │   │       │   └── UserUpdateRequest.java
-│   │   │       ├── model/               # Entity classes
-│   │   │       │   ├── User.java
-│   │   │       │   ├── Location.java
-│   │   │       │   ├── Route.java
-│   │   │       │   ├── RouteWaypoint.java
-│   │   │       │   └── DeliveryRequest.java
-│   │   │       ├── repository/          # Data repositories
-│   │   │       │   ├── UserRepository.java
-│   │   │       │   ├── LocationRepository.java
-│   │   │       │   ├── RouteRepository.java
-│   │   │       │   └── DeliveryRequestRepository.java
-│   │   │       ├── service/             # Business logic
-│   │   │       │   ├── UserService.java
-│   │   │       │   ├── LocationService.java
-│   │   │       │   ├── RouteService.java
-│   │   │       │   ├── RouteOptimizationService.java
-│   │   │       │   └── DeliveryService.java
-│   │   │       ├── security/            # Security configuration
-│   │   │       │   ├── JwtAuthenticationFilter.java
-│   │   │       │   └── JwtService.java
-│   │   │       └── exception/           # Exception handling
-│   │   │           ├── ErrorResponse.java
-│   │   │           ├── GlobalExceptionHandler.java
-│   │   │           └── ResourceNotFoundException.java
-│   │   └── resources/
-│   │       ├── application.yml          # Application configuration
-│   │       └── db/
-│   │           └── migration/
-│   │               └── V1__Create_initial_schema.sql
-│   └── test/                            # Test classes
-├── docs/                               # Documentation
-└── pom.xml                             # Maven configuration
+optimal-route-app/
+├── src/main/java/com/example/route/
+│   ├── RouteApplication.java          # Main Spring Boot application
+│   ├── controller/
+│   │   └── RouteController.java       # REST endpoints and form handling
+│   ├── service/
+│   │   └── RouteService.java          # Google Maps API integration
+│   └── dto/
+│       ├── RouteRequest.java          # Request data transfer object
+│       └── RouteResponse.java         # Response data transfer object
+├── src/main/resources/
+│   ├── application.properties         # Application configuration
+│   └── templates/
+│       └── index.html                 # Main web interface
+├── pom.xml                           # Maven dependencies
+└── README.md                         # This file
 ```
 
-## Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
 
 - Java 17 or higher
-- Maven 3.6+
-- PostgreSQL 15+ with PostGIS extension
-- Git
+- Maven 3.6 or higher
+- Google Maps API key
 
-### Database Setup
-
-1. **Install PostgreSQL and PostGIS**
-   ```bash
-   # Ubuntu/Debian
-   sudo apt-get install postgresql postgresql-contrib postgis
-   
-   # macOS with Homebrew
-   brew install postgresql postgis
-   
-   # Windows: Download from https://www.postgresql.org/download/windows/
-   ```
-
-2. **Create Database**
-   ```sql
-   CREATE DATABASE optiroute;
-   CREATE EXTENSION postgis;
-   ```
-
-3. **Run Migration**
-   ```bash
-   # The application will automatically run the migration on startup
-   # Or manually execute the SQL file in src/main/resources/db/migration/
-   ```
-
-### Application Setup
+### Setup Instructions
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/OptiRoute.git
+   git clone <repository-url>
    cd OptiRoute
    ```
 
-2. **Configure database connection**
-   Edit `src/main/resources/application.yml`:
-   ```yaml
-   spring:
-     datasource:
-       url: jdbc:postgresql://localhost:5432/optiroute
-       username: your_username
-       password: your_password
-   ```
+2. **Get a Google Maps API Key**
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Create a new project or select an existing one
+   - Enable the following APIs:
+     - Maps JavaScript API
+     - Directions API
+   - Create credentials (API Key)
+   - Restrict the API key to your domain for security
 
-3. **Build and run**
+3. **Configure the API Key**
+   - Open `src/main/resources/application.properties`
+   - Replace `YOUR_GOOGLE_MAPS_API_KEY_HERE` with your actual API key
+   - Also update the API key in `src/main/resources/templates/index.html` (line with Google Maps script)
+
+4. **Run the application**
    ```bash
-   mvn clean install
    mvn spring-boot:run
    ```
 
-4. **Access the application**
-   - API Base URL: `http://localhost:8080`
-   - Swagger UI: `http://localhost:8080/swagger-ui.html`
-   - API Documentation: `http://localhost:8080/api-docs`
+5. **Access the application**
+   - Open your browser and go to `http://localhost:8080`
+   - Start planning your optimal route!
 
-### Default Users
+## 📖 Usage
 
-The application comes with sample users:
-- **Admin**: `admin` / `admin`
-- **Driver 1**: `driver1` / `driver1`
-- **Driver 2**: `driver2` / `driver2`
+1. **Enter Starting Point**: Type the address of your starting location
+2. **Add Stops**: Click "Add Stop" to add multiple waypoints
+3. **Set End Point** (Optional): Enter a final destination
+4. **Choose Trip Type**: Toggle "Round Trip" if you want to return to the start
+5. **Find Route**: Click "Find Optimal Route" to get the optimized path
+6. **View Results**: See the route on the map and detailed information below
 
-## API Endpoints
+## 🔧 Configuration
 
-### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - User login
-- `POST /api/auth/refresh` - Refresh JWT token
-- `POST /api/auth/logout` - User logout
-- `GET /api/auth/me` - Get current user
-- `PUT /api/auth/me` - Update current user
-- `POST /api/auth/change-password` - Change password
+### Application Properties
 
-### User Management (Admin Only)
-- `GET /api/users` - Get all users (paginated with filters)
-- `GET /api/users/{id}` - Get user by ID
-- `POST /api/users` - Create new user
-- `PUT /api/users/{id}` - Update user
-- `DELETE /api/users/{id}` - Delete user
-- `PUT /api/users/{id}/activate` - Activate user
-- `PUT /api/users/{id}/deactivate` - Deactivate user
-- `PUT /api/users/{id}/role` - Change user role
-- `GET /api/users/search` - Search users
-- `GET /api/users/role/{role}` - Get users by role
-- `GET /api/users/active` - Get active users
-- `GET /api/users/inactive` - Get inactive users
-- `POST /api/users/{id}/reset-password` - Reset user password
-- `GET /api/users/drivers` - Get all drivers
-- `GET /api/users/drivers/available` - Get available drivers
-- `GET /api/users/stats` - Get user statistics
+Key configuration options in `application.properties`:
 
-### Locations
-- `GET /api/locations` - Get all locations (paginated)
-- `GET /api/locations/{id}` - Get location by ID
-- `POST /api/locations` - Create new location
-- `PUT /api/locations/{id}` - Update location
-- `DELETE /api/locations/{id}` - Delete location
-- `GET /api/locations/type/{type}` - Get locations by type
-- `GET /api/locations/city/{city}` - Get locations by city
-- `GET /api/locations/search?query={query}` - Search locations
-- `POST /api/locations/nearby` - Find nearby locations
-- `POST /api/locations/distance` - Calculate distance
+```properties
+# Server port
+server.port=8080
 
-### Route Management
-- `GET /api/routes` - Get all routes (paginated with filters)
-- `GET /api/routes/{id}` - Get route by ID
-- `POST /api/routes` - Create new route
-- `PUT /api/routes/{id}` - Update route
-- `DELETE /api/routes/{id}` - Delete route
-- `POST /api/routes/optimize` - Optimize route
-- `POST /api/routes/{id}/assign` - Assign route to driver
-- `PUT /api/routes/{id}/status` - Update route status
-- `GET /api/routes/driver/{driverId}` - Get routes by driver
-- `GET /api/routes/status/{status}` - Get routes by status
-- `POST /api/routes/batch-optimize` - Batch optimize routes
-- `GET /api/routes/{id}/waypoints` - Get route with waypoints
-- `POST /api/routes/{id}/waypoints/reorder` - Reorder waypoints
+# Google Maps API Key
+google.maps.api.key=YOUR_API_KEY_HERE
 
-### Delivery Management
-- `GET /api/deliveries` - Get all deliveries (paginated with filters)
-- `GET /api/deliveries/{id}` - Get delivery by ID
-- `POST /api/deliveries` - Create new delivery request
-- `PUT /api/deliveries/{id}` - Update delivery request
-- `DELETE /api/deliveries/{id}` - Delete delivery request
-- `POST /api/deliveries/{id}/assign` - Assign delivery to driver
-- `PUT /api/deliveries/{id}/status` - Update delivery status
-- `GET /api/deliveries/driver/{driverId}` - Get deliveries by driver
-- `GET /api/deliveries/status/{status}` - Get deliveries by status
-- `GET /api/deliveries/customer/{customerId}` - Get deliveries by customer
-- `POST /api/deliveries/{id}/pickup` - Mark as picked up
-- `POST /api/deliveries/{id}/delivered` - Mark as delivered
-- `POST /api/deliveries/{id}/failed` - Mark as failed
-- `GET /api/deliveries/urgent` - Get urgent deliveries
-- `GET /api/deliveries/overdue` - Get overdue deliveries
-- `POST /api/deliveries/{id}/reschedule` - Reschedule delivery
-- `GET /api/deliveries/stats` - Get delivery statistics
-
-## Database Schema
-
-### Core Tables
-- **users** - User accounts and authentication
-- **locations** - Geographic locations with PostGIS coordinates
-- **routes** - Optimized routes with waypoints
-- **route_waypoints** - Individual stops along routes
-- **delivery_requests** - Delivery requests and tracking
-
-### Key Features
-- Spatial indexing for efficient location queries
-- Foreign key relationships for data integrity
-- Timestamp tracking for audit trails
-- Soft delete functionality
-- Comprehensive status tracking for routes and deliveries
-
-## Development
-
-### Running Tests
-```bash
-mvn test
+# Logging level
+logging.level.com.example.route=DEBUG
 ```
 
-### Code Style
-The project uses Lombok for reducing boilerplate code and follows Spring Boot conventions.
+### API Endpoints
 
-### Adding New Features
-1. Create entity classes in `model/` package
-2. Create DTOs in `dto/` package
-3. Create repository interfaces in `repository/` package
-4. Implement business logic in `service/` package
-5. Create REST controllers in `controller/` package
-6. Add appropriate tests
+- `GET /` - Main application page
+- `POST /api/route` - REST API for route optimization
+- `POST /route` - Form submission endpoint
 
-## Contributing
+## 🧪 Example Usage
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+### Sample Request
+```json
+{
+  "origin": "San Francisco, CA",
+  "waypoints": ["Palo Alto, CA", "San Jose, CA"],
+  "destination": "Los Angeles, CA",
+  "roundTrip": false
+}
+```
 
-## License
+### Sample Response
+```json
+{
+  "status": "OK",
+  "optimizedWaypoints": ["Palo Alto, CA", "San Jose, CA"],
+  "totalDistance": "612.3 km",
+  "totalDuration": "5 hr 45 min",
+  "legs": [
+    {
+      "startAddress": "San Francisco, CA, USA",
+      "endAddress": "Palo Alto, CA, USA",
+      "distance": "51.2 km",
+      "duration": "45 min"
+    }
+  ]
+}
+```
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## 🔒 Security Considerations
 
-## Support
+- **API Key Protection**: Always restrict your Google Maps API key to specific domains
+- **Input Validation**: The application validates all user inputs
+- **Error Handling**: Comprehensive error handling for API failures
 
-For support and questions:
-- Email: support@optiroute.com
-- Issues: [GitHub Issues](https://github.com/yourusername/OptiRoute/issues)
-- Documentation: [API Docs](http://localhost:8080/swagger-ui.html)
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **"Google Maps API error"**
+   - Check if your API key is correct
+   - Verify that Directions API is enabled
+   - Ensure your API key has proper restrictions
+
+2. **"No routes found"**
+   - Check if the addresses are valid
+   - Ensure there are no typos in location names
+   - Try using more specific addresses
+
+3. **Application won't start**
+   - Verify Java 17+ is installed: `java -version`
+   - Check Maven installation: `mvn -version`
+   - Ensure all dependencies are downloaded
+
+### Debug Mode
+
+Enable debug logging by setting in `application.properties`:
+```properties
+logging.level.com.example.route=DEBUG
+logging.level.org.springframework.web=DEBUG
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- Google Maps Platform for providing the routing APIs
+- Spring Boot team for the excellent framework
+- The open-source community for various tools and libraries
+
+## 📞 Support
+
+If you encounter any issues or have questions:
+
+1. Check the troubleshooting section above
+2. Review the application logs
+3. Create an issue in the repository
+4. Contact the development team
+
+---
+
+**Happy Routing! 🗺️** 
